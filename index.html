@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Front-end</title>
+</head>
+<body>
+
+    <script>
+
+        async function getResponse() {
+            try {
+            // Consuming API on Front-end.
+            const response = await fetch('http://localhost:6006/users');
+            const date = await response.json();
+            showUsersAndEmails(date);
+            } catch(error) {
+                console.log(error)
+            };
+        };
+
+        getResponse();
+        
+        // Function that shows all users and emails.
+        function showUsersAndEmails(usersAndEmails) {
+            let output = ''
+            for (userAndEmail of usersAndEmails) {
+                output += `<li>${userAndEmail.name}</li>` + `<li>${userAndEmail.email}</li>` + `</br>`  
+            };
+            document.querySelector('body').innerHTML = output
+        };
+
+    </script>
+
+</body>
+</html>
